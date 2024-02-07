@@ -23,9 +23,9 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.common.SecurityTestUtil;
 import org.apache.cxf.fediz.core.FederationConstants;
 import org.apache.cxf.fediz.core.config.FedizConfigurator;

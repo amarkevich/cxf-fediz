@@ -21,8 +21,7 @@ package org.apache.cxf.fediz.spring.preauth;
 
 import java.security.Principal;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.core.FedizPrincipal;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 

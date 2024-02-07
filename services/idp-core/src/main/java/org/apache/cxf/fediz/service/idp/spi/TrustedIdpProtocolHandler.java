@@ -20,8 +20,7 @@ package org.apache.cxf.fediz.service.idp.spi;
 
 import java.net.URL;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.service.idp.domain.Idp;
 import org.apache.cxf.fediz.service.idp.domain.TrustedIdp;
 import org.apache.cxf.ws.security.tokenstore.SecurityToken;

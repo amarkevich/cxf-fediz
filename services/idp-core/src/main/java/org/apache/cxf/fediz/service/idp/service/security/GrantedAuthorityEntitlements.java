@@ -24,11 +24,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import org.apache.cxf.fediz.service.idp.domain.Entitlement;
 import org.apache.cxf.fediz.service.idp.domain.Role;
 import org.apache.cxf.fediz.service.idp.service.RoleDAO;

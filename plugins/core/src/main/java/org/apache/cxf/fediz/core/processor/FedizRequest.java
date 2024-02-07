@@ -23,8 +23,7 @@ import java.io.Serializable;
 import java.security.cert.Certificate;
 import java.util.Arrays;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.core.RequestState;
 
 public class FedizRequest implements Serializable {

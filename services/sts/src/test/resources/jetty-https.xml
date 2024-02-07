@@ -1,6 +1,4 @@
-<?xml version="1.0"?>
-<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
-
+<?xml version="1.0"?><!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://www.eclipse.org/jetty/configure_10_0.dtd">
 <!--
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements. See the NOTICE file
@@ -19,7 +17,6 @@
  specific language governing permissions and limitations
  under the License.
 -->
-
 
 <!-- ============================================================= -->
 <!-- Configure a HTTPS connector.                                  -->
@@ -41,7 +38,6 @@
     <Arg>
       <New class="org.eclipse.jetty.server.HttpConnectionFactory">
         <Arg name="config"><Ref refid="sslHttpConfig" /></Arg>
-        <Arg name="compliance"><Call class="org.eclipse.jetty.http.HttpCompliance" name="valueOf"><Arg><Property name="jetty.http.compliance" default="RFC7230"/></Arg></Call></Arg>
       </New>
     </Arg>
   </Call>

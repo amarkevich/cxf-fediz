@@ -19,7 +19,7 @@
 
 package org.apache.cxf.fediz.core.spi;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class RealmCallback extends AbstractServletCallback {
 

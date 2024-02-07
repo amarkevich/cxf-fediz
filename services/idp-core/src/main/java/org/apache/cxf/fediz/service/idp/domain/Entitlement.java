@@ -20,9 +20,9 @@ package org.apache.cxf.fediz.service.idp.domain;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "entitlement", namespace = "http://org.apache.cxf.fediz/")
 @XmlType(propOrder = {"name", "description", "internal", "id" })

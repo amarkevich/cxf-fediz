@@ -1,6 +1,4 @@
-<?xml version="1.0"?>
-<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
-
+<?xml version="1.0"?><!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://www.eclipse.org/jetty/configure_10_0.dtd">
 <!--
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements. See the NOTICE file
@@ -48,7 +46,6 @@
         <Set name="host"><Property name="jetty.ssl.host" deprecated="jetty.host" /></Set>
         <Set name="port"><Property name="jetty.ssl.port" deprecated="ssl.port" default="${sts.https.port}" /></Set>
         <Set name="idleTimeout"><Property name="jetty.ssl.idleTimeout" deprecated="ssl.timeout" default="30000"/></Set>
-        <Set name="soLingerTime"><Property name="jetty.ssl.soLingerTime" deprecated="ssl.soLingerTime" default="-1"/></Set>
         <Set name="acceptorPriorityDelta"><Property name="jetty.ssl.acceptorPriorityDelta" deprecated="ssl.acceptorPriorityDelta" default="0"/></Set>
         <Set name="acceptQueueSize"><Property name="jetty.ssl.acceptQueueSize" deprecated="ssl.acceptQueueSize" default="0"/></Set>
       </New>

@@ -21,17 +21,15 @@ package org.apache.cxf.fediz.service.idp.service.jpa;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.apache.cxf.fediz.service.idp.domain.Entitlement;
 import org.apache.cxf.fediz.service.idp.service.EntitlementDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Repository
 @Transactional

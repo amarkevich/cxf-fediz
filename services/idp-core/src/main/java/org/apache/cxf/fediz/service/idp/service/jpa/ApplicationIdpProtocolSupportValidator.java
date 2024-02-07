@@ -18,33 +18,25 @@
  */
 package org.apache.cxf.fediz.service.idp.service.jpa;
 
-import java.util.List;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import org.apache.cxf.fediz.service.idp.protocols.ProtocolController;
 import org.apache.cxf.fediz.service.idp.spi.ApplicationProtocolHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 /**
  * Validate that the protocol is a valid Application protocol
  */
-@Component
 public class ApplicationIdpProtocolSupportValidator
     implements ConstraintValidator<ApplicationProtocolSupported, String> {
 
     @Autowired
-    @Qualifier("applicationProtocolControllerImpl")
+//    @Qualifier("applicationProtocolControllerImpl")
     private ProtocolController<ApplicationProtocolHandler> applicationProtocolHandlers;
 
     @Override
     public boolean isValid(String object, ConstraintValidatorContext constraintContext) {
-
-        List<String> protocols = applicationProtocolHandlers.getProtocols();
-        return protocols.contains(object);
+        return null != applicationProtocolHandlers.getProtocolHandler(object);
     }
 
     @Override

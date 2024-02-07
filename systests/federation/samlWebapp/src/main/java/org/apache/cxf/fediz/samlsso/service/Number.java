@@ -18,7 +18,7 @@
  */
 package org.apache.cxf.fediz.samlsso.service;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Number")
 public class Number {

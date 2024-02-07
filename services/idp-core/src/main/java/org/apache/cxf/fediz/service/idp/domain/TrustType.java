@@ -18,7 +18,7 @@
  */
 package org.apache.cxf.fediz.service.idp.domain;
 
-import javax.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
 public enum TrustType {

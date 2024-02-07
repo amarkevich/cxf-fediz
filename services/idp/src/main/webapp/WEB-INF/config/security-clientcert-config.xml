@@ -20,14 +20,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:security="http://www.springframework.org/schema/security"
-    xmlns:util="http://www.springframework.org/schema/util"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd
-        http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util.xsd
         ">
 
     <!-- DISABLE in production as it might log confidential information about the user -->
@@ -69,18 +66,18 @@
         <property name="authenticationProvider" ref="stsClientCertAuthProvider" />
     </bean>
 
-    <util:map id="securityProperties">
-        <entry key="ws-security.username" value="idp-user" />
-        <entry key="ws-security.password" value="idp-pass" />
-    </util:map>
-
     <bean id="stsClientCertAuthProvider" class="org.apache.cxf.fediz.service.idp.STSPreAuthAuthenticationProvider">
         <property name="wsdlLocation" value="https://localhost:0/fediz-idp-sts/${realm.STS_URI}/STSServiceTransportUT?wsdl" />
         <property name="wsdlEndpoint" value="TransportUT_Port" />
         <property name="wsdlService" value="SecurityTokenService" />
         <property name="appliesTo" value="urn:fediz:idp" />
         <property name="tokenType" value="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0" />
-        <property name="properties" ref="securityProperties" />
+        <property name="properties">
+            <map>
+                <entry key="ws-security.username" value="idp-user" />
+                <entry key="ws-security.password" value="idp-pass" />
+            </map>
+        </property>
     </bean>
 
     <security:authentication-manager id="clientCertAuthenticationManager">

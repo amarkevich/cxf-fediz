@@ -22,13 +22,13 @@ package org.apache.cxf.fediz.core.samlsso;
 import java.io.File;
 import java.net.URL;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.transform.TransformerException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.common.SecurityTestUtil;
 import org.apache.cxf.fediz.core.config.FedizConfigurator;
 import org.apache.cxf.fediz.core.config.FedizContext;

@@ -18,8 +18,7 @@
  */
 package org.apache.cxf.fediz.service.idp.beans;
 
-import javax.servlet.http.Cookie;
-
+import jakarta.servlet.http.Cookie;
 import org.apache.cxf.fediz.service.idp.util.WebUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.webflow.execution.RequestContext;

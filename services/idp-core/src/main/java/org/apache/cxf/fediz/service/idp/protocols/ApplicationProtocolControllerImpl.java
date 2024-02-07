@@ -19,14 +19,11 @@
 
 package org.apache.cxf.fediz.service.idp.protocols;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Collection;
 
 import org.apache.cxf.fediz.service.idp.spi.ApplicationProtocolHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,8 +31,11 @@ public class ApplicationProtocolControllerImpl implements ProtocolController<App
 
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationProtocolControllerImpl.class);
 
-    @Autowired
-    private List<ApplicationProtocolHandler> protocolHandlers;
+    private final Collection<ApplicationProtocolHandler> protocolHandlers;
+
+    public ApplicationProtocolControllerImpl(Collection<ApplicationProtocolHandler> protocolHandlers) {
+        this.protocolHandlers = protocolHandlers;
+    }
 
     @Override
     public ApplicationProtocolHandler getProtocolHandler(String protocol) {
@@ -46,15 +46,6 @@ public class ApplicationProtocolControllerImpl implements ProtocolController<App
         }
         LOG.warn("No protocol handler found for {}", protocol);
         return null;
-    }
-
-    @Override
-    public List<String> getProtocols() {
-        List<String> protocols = new ArrayList<>();
-        for (ApplicationProtocolHandler protocolHandler : protocolHandlers) {
-            protocols.add(protocolHandler.getProtocol());
-        }
-        return Collections.unmodifiableList(protocols);
     }
 
 }

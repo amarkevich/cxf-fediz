@@ -24,9 +24,9 @@ import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -125,7 +125,7 @@ public class AuthnRequestParser {
             } else if (parsedRequest instanceof LogoutRequest) {
                 SAMLLogoutRequest logoutRequest = new SAMLLogoutRequest((LogoutRequest)parsedRequest);
                 WebUtils.putAttributeInFlowScope(context, IdpConstants.SAML_LOGOUT_REQUEST, logoutRequest);
-                if (logoutRequest.getNotOnOrAfter() != null && (new Date()).after(logoutRequest.getNotOnOrAfter())) {
+                if (logoutRequest.getNotOnOrAfter() != null && Instant.now().isAfter(logoutRequest.getNotOnOrAfter())) {
                     LOG.debug("The LogoutRequest is expired");
                     throw new ProcessingException(TYPE.BAD_REQUEST);
                 }

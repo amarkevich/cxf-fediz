@@ -18,21 +18,16 @@
  */
 package org.apache.cxf.fediz.service.idp.service.jpa;
 
-import java.util.List;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import org.apache.cxf.fediz.service.idp.protocols.ProtocolController;
 import org.apache.cxf.fediz.service.idp.spi.TrustedIdpProtocolHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 /**
  * Validate that the protocol is a valid IdP protocol
  */
-@Component
 public class TrustedIdpProtocolSupportValidator implements ConstraintValidator<TrustedIdpProtocolSupported, String> {
 
     @Autowired
@@ -42,9 +37,7 @@ public class TrustedIdpProtocolSupportValidator implements ConstraintValidator<T
 
     @Override
     public boolean isValid(String object, ConstraintValidatorContext constraintContext) {
-
-        List<String> protocols = trustedIdpProtocolHandlers.getProtocols();
-        return protocols.contains(object);
+        return null != trustedIdpProtocolHandlers.getProtocolHandler(object);
     }
 
     @Override

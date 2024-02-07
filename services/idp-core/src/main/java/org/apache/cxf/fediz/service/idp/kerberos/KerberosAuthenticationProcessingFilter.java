@@ -20,21 +20,20 @@ package org.apache.cxf.fediz.service.idp.kerberos;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -64,8 +63,8 @@ public class KerberosAuthenticationProcessingFilter extends GenericFilterBean {
     /*
      * (non-Javadoc)
      *
-     * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
-     * javax.servlet.ServletResponse, javax.servlet.FilterChain)
+     * @see jakarta.servlet.Filter#doFilter(jakarta.servlet.ServletRequest,
+     * jakarta.servlet.ServletResponse, jakarta.servlet.FilterChain)
      */
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
         throws IOException, ServletException {
@@ -80,12 +79,12 @@ public class KerberosAuthenticationProcessingFilter extends GenericFilterBean {
             }
         }
         String header = request.getHeader("Authorization");
-        if (header != null && header.startsWith("Negotiate ")) {
+        if ((header != null) && header.startsWith("Negotiate ")) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Received Negotiate Header for request " + request.getRequestURL() + ": " + header);
             }
             byte[] base64Token = header.substring(10).getBytes(StandardCharsets.UTF_8);
-            byte[] kerberosTicket = Base64.decode(base64Token);
+            byte[] kerberosTicket = Base64.getDecoder().decode(base64Token);
             KerberosServiceRequestToken authenticationRequest = new KerberosServiceRequestToken(kerberosTicket);
             authenticationRequest.setDetails(authenticationDetailsSource.buildDetails(request));
             Authentication authentication;
@@ -180,6 +179,3 @@ public class KerberosAuthenticationProcessingFilter extends GenericFilterBean {
         Assert.notNull(this.authenticationManager, "authenticationManager must be specified");
     }
 }
-
-
-

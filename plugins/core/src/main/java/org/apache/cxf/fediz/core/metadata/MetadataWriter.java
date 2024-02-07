@@ -29,13 +29,13 @@ import java.security.cert.X509Certificate;
 import java.util.Base64;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.w3c.dom.Document;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.core.config.Claim;
 import org.apache.cxf.fediz.core.config.FederationProtocol;
 import org.apache.cxf.fediz.core.config.FedizContext;

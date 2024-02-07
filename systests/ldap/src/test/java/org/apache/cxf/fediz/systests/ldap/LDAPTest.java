@@ -24,7 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;

@@ -19,12 +19,12 @@
 
 package org.apache.cxf.fediz.core.federation;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.net.URI;
-import java.net.URL;
 import java.security.cert.X509Certificate;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 
@@ -83,8 +83,6 @@ import org.apache.wss4j.common.util.KeyUtils;
 import org.apache.wss4j.common.util.XMLUtils;
 import org.apache.wss4j.dom.WSConstants;
 import org.apache.wss4j.dom.message.WSSecEncrypt;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -114,24 +112,17 @@ public class FederationResponseTest {
     static final String TEST_RSTR_ISSUER = "FedizSTSIssuer";
     static final String TEST_AUDIENCE = "https://localhost/fedizhelloworld";
 
-    private static final String CONFIG_FILE = "fediz_test_config.xml";
-
     private static Crypto crypto;
     private static CallbackHandler cbPasswordHandler;
     private static FedizConfigurator configurator;
 
 
     @BeforeAll
-    public static void init() {
-        try {
-            crypto = CryptoFactory.getInstance("signature.properties");
-            cbPasswordHandler = new KeystoreCallbackHandler();
-            getFederationConfigurator();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void init() throws Exception {
+        crypto = CryptoFactory.getInstance("signature.properties");
+        cbPasswordHandler = new KeystoreCallbackHandler();
+        getFederationConfigurator();
         Assertions.assertNotNull(configurator);
-
     }
 
     @AfterAll
@@ -139,24 +130,17 @@ public class FederationResponseTest {
         SecurityTestUtil.cleanup();
     }
 
-
-    private static FedizConfigurator getFederationConfigurator() {
+    private static FedizConfigurator getFederationConfigurator() throws Exception {
         if (configurator != null) {
             return configurator;
         }
-        try {
-            configurator = new FedizConfigurator();
-            final URL resource = Thread.currentThread().getContextClassLoader()
-                    .getResource(CONFIG_FILE);
-            File f = new File(resource.toURI());
-            configurator.loadConfig(f);
-            return configurator;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        configurator = new FedizConfigurator();
+        try (InputStreamReader r = new InputStreamReader(
+            FederationResponseTest.class.getResourceAsStream("/fediz_test_config.xml"))) {
+            configurator.loadConfig(r);
         }
+        return configurator;
     }
-
 
     /**
      * Validate RSTR without RequestedSecurityToken element
@@ -1224,12 +1208,8 @@ public class FederationResponseTest {
         callbackHandler.setIssuer(TEST_RSTR_ISSUER);
         callbackHandler.setSubjectName(TEST_USER);
         ConditionsBean cp = new ConditionsBean();
-        DateTime currentTime = new DateTime();
-        currentTime = currentTime.minusSeconds(60);
-        cp.setNotAfter(currentTime);
-        currentTime = new DateTime();
-        currentTime = currentTime.minusSeconds(300);
-        cp.setNotBefore(currentTime);
+        cp.setNotAfter(Instant.now().minusSeconds(60));
+        cp.setNotBefore(Instant.now().minusSeconds(300));
         AudienceRestrictionBean audienceRestriction = new AudienceRestrictionBean();
         audienceRestriction.getAudienceURIs().add(TEST_AUDIENCE);
         cp.setAudienceRestrictions(Collections.singletonList(audienceRestriction));
@@ -1271,12 +1251,8 @@ public class FederationResponseTest {
         callbackHandler.setIssuer(TEST_RSTR_ISSUER);
         callbackHandler.setSubjectName(TEST_USER);
         ConditionsBean cp = new ConditionsBean();
-        DateTime currentTime = new DateTime();
-        currentTime = currentTime.plusSeconds(300);
-        cp.setNotAfter(currentTime);
-        currentTime = new DateTime();
-        currentTime = currentTime.plusSeconds(30);
-        cp.setNotBefore(currentTime);
+        cp.setNotAfter(Instant.now().plusSeconds(300));
+        cp.setNotBefore(Instant.now().plusSeconds(30));
         AudienceRestrictionBean audienceRestriction = new AudienceRestrictionBean();
         audienceRestriction.getAudienceURIs().add(TEST_AUDIENCE);
         cp.setAudienceRestrictions(Collections.singletonList(audienceRestriction));
@@ -1594,7 +1570,7 @@ public class FederationResponseTest {
 
         // Change IssueInstant attribute
         String issueInstance = token.getAttributeNS(null, "IssueInstant");
-        DateTime issueDateTime = new DateTime(issueInstance, DateTimeZone.UTC);
+        Instant issueDateTime = Instant.parse(issueInstance);
         issueDateTime = issueDateTime.plusSeconds(1);
         token.setAttributeNS(null, "IssueInstant", issueDateTime.toString());
 

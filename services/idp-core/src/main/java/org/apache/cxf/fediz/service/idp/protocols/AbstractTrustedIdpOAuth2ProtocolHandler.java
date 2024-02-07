@@ -26,7 +26,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.time.Instant;
 import java.util.Collections;
-import java.util.Date;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
@@ -47,7 +46,6 @@ import org.apache.wss4j.common.saml.bean.SubjectBean;
 import org.apache.wss4j.common.saml.bean.Version;
 import org.apache.wss4j.common.saml.builder.SAML2Constants;
 import org.apache.wss4j.common.util.Loader;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.webflow.execution.RequestContext;
@@ -132,12 +130,11 @@ public abstract class AbstractTrustedIdpOAuth2ProtocolHandler extends AbstractTr
 
         // Conditions
         ConditionsBean conditionsBean = new ConditionsBean();
-        conditionsBean.setNotAfter(new DateTime(Date.from(expires)));
+        conditionsBean.setNotAfter(expires);
         if (notBefore != null) {
-            DateTime notBeforeDT = new DateTime(Date.from(notBefore));
-            conditionsBean.setNotBefore(notBeforeDT);
+            conditionsBean.setNotBefore(notBefore);
         } else {
-            conditionsBean.setNotBefore(new DateTime());
+            conditionsBean.setNotBefore(Instant.now());
         }
         callbackHandler.setConditionsBean(conditionsBean);
 

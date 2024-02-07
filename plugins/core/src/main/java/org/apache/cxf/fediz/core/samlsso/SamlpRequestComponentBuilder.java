@@ -19,10 +19,10 @@
 
 package org.apache.cxf.fediz.core.samlsso;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-import org.joda.time.DateTime;
 import org.opensaml.core.xml.XMLObjectBuilderFactory;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.saml.common.SAMLObjectBuilder;
@@ -85,7 +85,7 @@ public final class SamlpRequestComponentBuilder {
         authnRequest.setForceAuthn(forceAuthn);
         authnRequest.setID("_" + UUID.randomUUID().toString());
         authnRequest.setIsPassive(isPassive);
-        authnRequest.setIssueInstant(new DateTime());
+        authnRequest.setIssueInstant(Instant.now());
         authnRequest.setProtocolBinding(protocolBinding);
         authnRequest.setVersion(version);
 
@@ -115,7 +115,7 @@ public final class SamlpRequestComponentBuilder {
         LogoutRequest logoutRequest = logoutRequestBuilder.buildObject();
 
         logoutRequest.setID("_" + UUID.randomUUID().toString());
-        logoutRequest.setIssueInstant(new DateTime());
+        logoutRequest.setIssueInstant(Instant.now());
 
         if (reason != null) {
             logoutRequest.setReason(reason);
@@ -127,7 +127,7 @@ public final class SamlpRequestComponentBuilder {
         if (sessionIndices != null && !sessionIndices.isEmpty()) {
             for (String sessionIndex : sessionIndices) {
                 SessionIndex sessionIndexObj = sessionIndexBuilder.buildObject();
-                sessionIndexObj.setSessionIndex(sessionIndex);
+                sessionIndexObj.setValue(sessionIndex);
                 logoutRequest.getSessionIndexes().add(sessionIndexObj);
             }
         }
@@ -204,7 +204,7 @@ public final class SamlpRequestComponentBuilder {
                 builderFactory.getBuilder(AuthnContextClassRef.DEFAULT_ELEMENT_NAME);
         }
         AuthnContextClassRef authnCtxClassRef = requestedAuthnCtxClassRefBuilder.buildObject();
-        authnCtxClassRef.setAuthnContextClassRef(authnCtxClassRefValue);
+        authnCtxClassRef.setURI(authnCtxClassRefValue);
 
         return authnCtxClassRef;
     }

@@ -18,7 +18,7 @@
  */
 package org.apache.cxf.fediz.service.idp.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "requestClaim", namespace = "http://org.apache.cxf.fediz/")
 public class RequestClaim extends Claim {

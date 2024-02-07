@@ -22,14 +22,14 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.Base64;
+import java.util.Objects;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.fediz.service.idp.domain.Application;
@@ -47,8 +47,10 @@ import org.junit.jupiter.api.Test;
 
 public class RestITTest {
 
-    private static String idpHttpsPort;
-    private static String realm;
+    private static String idpHttpsPort =
+        Objects.requireNonNull(System.getProperty("idp.https.port"), "Property 'idp.https.port' null");
+    private static String realm =
+        Objects.requireNonNull(System.getProperty("realm"), "Property 'realm' null");
     private static Bus bus;
 
 
@@ -63,12 +65,6 @@ public class RestITTest {
         System.setProperty("org.apache.commons.logging.simplelog.log.org.springframework.security", "info");
         System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.cxf.fediz", "info");
         System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.cxf", "info");
-
-        idpHttpsPort = System.getProperty("idp.https.port");
-        Assertions.assertNotNull(idpHttpsPort, "Property 'idp.https.port' null");
-
-        realm = System.getProperty("realm");
-        Assertions.assertNotNull(realm, "Property 'realm' null");
 
         SpringBusFactory bf = new SpringBusFactory();
 

@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package org.apache.cxf.fediz.core.config;
 
 import java.io.StringReader;
@@ -26,9 +25,9 @@ import java.util.Map;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import org.apache.cxf.fediz.common.SecurityTestUtil;
 import org.apache.cxf.fediz.core.config.jaxb.ArgumentType;
 import org.apache.cxf.fediz.core.config.jaxb.AudienceUris;

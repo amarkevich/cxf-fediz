@@ -21,8 +21,8 @@ package org.apache.cxf.fediz.service.idp.domain;
 import java.io.Serializable;
 import java.net.URI;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "claim", namespace = "http://org.apache.cxf.fediz/")
 public class Claim implements Serializable {

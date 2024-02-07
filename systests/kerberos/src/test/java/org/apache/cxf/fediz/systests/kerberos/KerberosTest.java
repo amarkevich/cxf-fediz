@@ -27,7 +27,7 @@ import java.util.Base64;
 
 import javax.security.auth.Subject;
 import javax.security.auth.login.LoginContext;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;

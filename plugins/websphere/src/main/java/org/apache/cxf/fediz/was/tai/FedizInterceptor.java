@@ -31,11 +31,11 @@ import java.util.Properties;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.security.auth.Subject;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import com.ibm.websphere.security.CustomRegistryException;
 import com.ibm.websphere.security.EntryNotFoundException;
@@ -284,8 +284,8 @@ public class FedizInterceptor implements TrustAssociationInterceptor {
     /*
      * (non-Javadoc)
      * @see com.ibm.wsspi.security.tai.TrustAssociationInterceptor#
-     * negotiateValidateandEstablishTrust(javax.servlet .http.HttpServletRequest,
-     * javax.servlet.http.HttpServletResponse)
+     * negotiateValidateandEstablishTrust(jakarta.servlet .http.HttpServletRequest,
+     * jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public TAIResult negotiateValidateandEstablishTrust(HttpServletRequest req, HttpServletResponse resp)

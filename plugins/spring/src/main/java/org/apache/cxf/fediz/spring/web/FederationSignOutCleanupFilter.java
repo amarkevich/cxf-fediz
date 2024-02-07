@@ -21,13 +21,12 @@ package org.apache.cxf.fediz.spring.web;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.core.FederationConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -30,9 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
@@ -40,6 +37,9 @@ import org.w3c.dom.Element;
 
 import org.xml.sax.SAXException;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
 import org.apache.cxf.Bus;
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.staxutils.StaxUtils;

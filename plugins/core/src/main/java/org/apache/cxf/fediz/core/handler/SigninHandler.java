@@ -21,10 +21,9 @@ package org.apache.cxf.fediz.core.handler;
 import java.security.cert.X509Certificate;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.cxf.fediz.core.FederationConstants;
 import org.apache.cxf.fediz.core.RequestState;
 import org.apache.cxf.fediz.core.SAMLSSOConstants;
@@ -118,7 +117,7 @@ public class SigninHandler<T> implements RequestHandler<T> {
             }
         }
         federationRequest.setRequest(req);
-        federationRequest.setCerts((X509Certificate[])req.getAttribute("javax.servlet.request.X509Certificate"));
+        federationRequest.setCerts((X509Certificate[])req.getAttribute("jakarta.servlet.request.X509Certificate"));
 
         FedizProcessor processor = FedizProcessorFactory.newFedizProcessor(fedizContext.getProtocol());
         return processor.processRequest(federationRequest, fedizContext);

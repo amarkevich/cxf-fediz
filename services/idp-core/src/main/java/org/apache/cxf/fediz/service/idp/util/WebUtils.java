@@ -18,11 +18,10 @@
  */
 package org.apache.cxf.fediz.service.idp.util;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.util.Assert;
 import org.springframework.webflow.execution.RequestContext;
 
@@ -32,7 +31,6 @@ import org.springframework.webflow.execution.RequestContext;
 public final class WebUtils {
 
     private WebUtils() {
-        super();
     }
 
     public static HttpServletRequest getHttpServletRequest(

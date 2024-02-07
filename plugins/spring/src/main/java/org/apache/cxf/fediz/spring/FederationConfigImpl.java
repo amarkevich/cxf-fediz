@@ -21,8 +21,7 @@ package org.apache.cxf.fediz.spring;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
+import jakarta.servlet.ServletContext;
 import org.apache.cxf.fediz.core.config.FedizConfigurator;
 import org.apache.cxf.fediz.core.config.FedizContext;
 import org.slf4j.Logger;

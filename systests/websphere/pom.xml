@@ -30,8 +30,6 @@
     <name>Apache Fediz Systests websphere 8.5</name>
     <packaging>jar</packaging>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Static port from external standalone Websphere RP -->
         <rp.https.port>8443</rp.https.port>
         <idp.https.port>9443</idp.https.port>

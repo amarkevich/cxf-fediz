@@ -24,7 +24,6 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
@@ -33,6 +32,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.binding.soap.SoapFault;
@@ -248,7 +248,7 @@ public class STSClientAction {
             HttpServletRequest servletRequest = WebUtils.getHttpServletRequest(context);
             if (servletRequest != null) {
                 X509Certificate[] certs = (X509Certificate[])servletRequest
-                    .getAttribute("javax.servlet.request.X509Certificate");
+                    .getAttribute("jakarta.servlet.request.X509Certificate");
                 if (certs != null && certs.length > 0) {
                     sts.setUseCertificateForConfirmationKeyInfo(true);
                     sts.setUseKeyCertificate(certs[0]);

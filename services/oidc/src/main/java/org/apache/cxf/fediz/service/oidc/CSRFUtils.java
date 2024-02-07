@@ -18,7 +18,7 @@
  */
 package org.apache.cxf.fediz.service.oidc;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.cxf.common.util.StringUtils;
 import org.apache.cxf.rt.security.crypto.CryptoUtils;

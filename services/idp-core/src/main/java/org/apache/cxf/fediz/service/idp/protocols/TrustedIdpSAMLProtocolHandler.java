@@ -36,15 +36,14 @@ import java.security.cert.X509Certificate;
 import java.util.Base64;
 import java.util.zip.DataFormatException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.UriBuilder;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.UriBuilder;
 import org.apache.cxf.common.util.Base64Exception;
 import org.apache.cxf.common.util.Base64Utility;
 import org.apache.cxf.common.util.StringUtils;

@@ -21,9 +21,9 @@ package org.apache.cxf.fediz.service.idp.rest;
 
 import java.net.URI;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriBuilder;
+import jakarta.ws.rs.core.UriInfo;
 
 
 public class RootServiceImpl implements RootService {
@@ -39,17 +39,17 @@ public class RootServiceImpl implements RootService {
         URI trustedIdpUrl = absolute.clone().path("trusted-idps").build();
         URI rolesUrl = absolute.clone().path("roles").build();
         URI entitlementsUrl = absolute.clone().path("entitlements").build();
-        javax.ws.rs.core.Link claims = javax.ws.rs.core.Link.fromUri(claimUrl).rel("claims")
+        jakarta.ws.rs.core.Link claims = jakarta.ws.rs.core.Link.fromUri(claimUrl).rel("claims")
             .type("application/xml").build();
-        javax.ws.rs.core.Link idps = javax.ws.rs.core.Link.fromUri(idpUrl).rel("idps")
+        jakarta.ws.rs.core.Link idps = jakarta.ws.rs.core.Link.fromUri(idpUrl).rel("idps")
             .type("application/xml").build();
-        javax.ws.rs.core.Link applications = javax.ws.rs.core.Link.fromUri(applicationUrl).rel("applications")
+        jakarta.ws.rs.core.Link applications = jakarta.ws.rs.core.Link.fromUri(applicationUrl).rel("applications")
             .type("application/xml").build();
-        javax.ws.rs.core.Link trustedIdps = javax.ws.rs.core.Link.fromUri(trustedIdpUrl).rel("trusted-idps")
+        jakarta.ws.rs.core.Link trustedIdps = jakarta.ws.rs.core.Link.fromUri(trustedIdpUrl).rel("trusted-idps")
             .type("application/xml").build();
-        javax.ws.rs.core.Link roles = javax.ws.rs.core.Link.fromUri(rolesUrl).rel("roles")
+        jakarta.ws.rs.core.Link roles = jakarta.ws.rs.core.Link.fromUri(rolesUrl).rel("roles")
             .type("application/xml").build();
-        javax.ws.rs.core.Link entitlements = javax.ws.rs.core.Link.fromUri(entitlementsUrl).rel("entitlements")
+        jakarta.ws.rs.core.Link entitlements = jakarta.ws.rs.core.Link.fromUri(entitlementsUrl).rel("entitlements")
             .type("application/xml").build();
 
         Response.ResponseBuilder builder = Response.ok().links(

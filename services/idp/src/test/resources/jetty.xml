@@ -1,6 +1,4 @@
-<?xml version="1.0"?>
-<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_3.dtd">
-
+<?xml version="1.0"?><!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://www.eclipse.org/jetty/configure_10_0.dtd">
 <!--
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements. See the NOTICE file
@@ -20,7 +18,6 @@
  under the License.
 -->
 
-
 <Configure id="Server" class="org.eclipse.jetty.server.Server">
 
 <New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
@@ -34,6 +31,7 @@
 	<Set name="sendServerVersion">true</Set>
 	<Set name="sendDateHeader">false</Set>
 	<Set name="headerCacheSize">512</Set>
+	<Set name="httpCompliance"><Call class="org.eclipse.jetty.http.HttpCompliance" name="valueOf"><Arg><Property name="jetty.http.compliance" default="RFC7230"/></Arg></Call></Set>
 
 	<!-- Uncomment to enable handling of X-Forwarded- style headers <Call name="addCustomizer"> 
 		<Arg><New class="org.eclipse.jetty.server.ForwardedRequestCustomizer"/></Arg> 

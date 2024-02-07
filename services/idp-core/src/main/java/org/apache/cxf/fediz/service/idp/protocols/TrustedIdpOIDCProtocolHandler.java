@@ -23,16 +23,14 @@ import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 import java.util.Map;
-
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.Response;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jakarta.ws.rs.core.Form;
+import jakarta.ws.rs.core.Response;
 import org.apache.cxf.fediz.core.exception.ProcessingException;
 import org.apache.cxf.fediz.core.util.CertsUtils;
 import org.apache.cxf.fediz.core.util.DOMUtils;
@@ -124,11 +122,9 @@ public class TrustedIdpOIDCProtocolHandler extends AbstractTrustedIdpOAuth2Proto
             }
 
             // Here we need to get the IdToken using the authorization code
-            List<Object> providers = new ArrayList<>();
-            providers.add(new OAuthJSONProvider());
-
-            WebClient client =
-                WebClient.create(tokenEndpoint, providers, clientId, clientSecret, "cxf-tls.xml");
+            WebClient client = WebClient.create(
+                tokenEndpoint, Collections.singletonList(new OAuthJSONProvider()),
+                clientId, clientSecret, "cxf-tls.xml");
 
             if (LOG.isDebugEnabled()) {
                 ClientConfiguration config = WebClient.getConfig(client);
@@ -283,12 +279,10 @@ public class TrustedIdpOIDCProtocolHandler extends AbstractTrustedIdpOAuth2Proto
         if (jwksUri != null && jwt.getJwsHeaders() != null
             && jwt.getJwsHeaders().containsHeader(JoseConstants.HEADER_KEY_ID)) {
             String kid = (String)jwt.getJwsHeaders().getHeader(JoseConstants.HEADER_KEY_ID);
-            LOG.debug("Attemping to retrieve key id {} from uri {}", kid, jwksUri);
-            List<Object> jsonKeyProviders = new ArrayList<>();
-            jsonKeyProviders.add(new JsonWebKeysProvider());
 
+            LOG.debug("Attemping to retrieve key id {} from uri {}", kid, jwksUri);
             WebClient client =
-                WebClient.create(jwksUri, jsonKeyProviders, "cxf-tls.xml");
+                WebClient.create(jwksUri, Collections.singletonList(new JsonWebKeysProvider()), "cxf-tls.xml");
             client.accept("application/json");
 
             ClientConfiguration config = WebClient.getConfig(client);

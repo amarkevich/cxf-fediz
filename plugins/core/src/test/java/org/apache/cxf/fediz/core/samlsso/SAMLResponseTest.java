@@ -19,15 +19,15 @@
 
 package org.apache.cxf.fediz.core.samlsso;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.net.URI;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
+import java.time.Instant;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +35,6 @@ import java.util.UUID;
 
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -43,6 +42,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.common.STSUtil;
 import org.apache.cxf.fediz.common.SecurityTestUtil;
 import org.apache.cxf.fediz.core.AbstractSAMLCallbackHandler;
@@ -78,8 +78,6 @@ import org.apache.wss4j.common.saml.bean.SubjectConfirmationDataBean;
 import org.apache.wss4j.common.saml.builder.SAML2Constants;
 import org.apache.wss4j.common.util.DOM2Writer;
 import org.apache.wss4j.dom.WSConstants;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.opensaml.saml.common.SAMLObjectContentReference;
 import org.opensaml.saml.common.SignableSAMLObject;
 import org.opensaml.saml.saml2.core.LogoutResponse;
@@ -109,8 +107,6 @@ public class SAMLResponseTest {
     static final String TEST_IDP_ISSUER = "http://url_to_the_issuer";
     static final String TEST_CLIENT_ADDRESS = "https://127.0.0.1";
 
-    private static final String CONFIG_FILE = "fediz_test_config_saml.xml";
-
     private static Crypto crypto;
     private static CallbackHandler cbPasswordHandler;
     private static FedizConfigurator configurator;
@@ -124,16 +120,11 @@ public class SAMLResponseTest {
 
 
     @BeforeAll
-    public static void init() {
-        try {
-            crypto = CryptoFactory.getInstance("signature.properties");
-            cbPasswordHandler = new KeystoreCallbackHandler();
-            getFederationConfigurator();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void init() throws Exception {
+        crypto = CryptoFactory.getInstance("signature.properties");
+        cbPasswordHandler = new KeystoreCallbackHandler();
+        getFederationConfigurator();
         Assertions.assertNotNull(configurator);
-
     }
 
     @AfterAll
@@ -142,21 +133,16 @@ public class SAMLResponseTest {
     }
 
 
-    private static FedizConfigurator getFederationConfigurator() {
+    private static FedizConfigurator getFederationConfigurator() throws Exception {
         if (configurator != null) {
             return configurator;
         }
-        try {
-            configurator = new FedizConfigurator();
-            final URL resource = Thread.currentThread().getContextClassLoader()
-                    .getResource(CONFIG_FILE);
-            File f = new File(resource.toURI());
-            configurator.loadConfig(f);
-            return configurator;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        configurator = new FedizConfigurator();
+        try (InputStreamReader r = new InputStreamReader(
+            SAMLResponseTest.class.getResourceAsStream("/fediz_test_config_saml.xml"))) {
+            configurator.loadConfig(r);
         }
+        return configurator;
     }
 
     /**
@@ -689,7 +675,7 @@ public class SAMLResponseTest {
         SubjectConfirmationDataBean subjectConfirmationData = new SubjectConfirmationDataBean();
         subjectConfirmationData.setAddress(TEST_CLIENT_ADDRESS);
         subjectConfirmationData.setInResponseTo(requestId);
-        subjectConfirmationData.setNotAfter(new DateTime().plusMinutes(5));
+        subjectConfirmationData.setNotAfter(Instant.now().plusSeconds(5 * 60));
         subjectConfirmationData.setRecipient(TEST_REQUEST_URL);
         callbackHandler.setSubjectConfirmationData(subjectConfirmationData);
 
@@ -910,12 +896,8 @@ public class SAMLResponseTest {
         callbackHandler.setSubjectName(TEST_USER);
 
         ConditionsBean cp = new ConditionsBean();
-        DateTime currentTime = new DateTime();
-        currentTime = currentTime.minusSeconds(60);
-        cp.setNotAfter(currentTime);
-        currentTime = new DateTime();
-        currentTime = currentTime.minusSeconds(300);
-        cp.setNotBefore(currentTime);
+        cp.setNotAfter(Instant.now().minusSeconds(60));
+        cp.setNotBefore(Instant.now().minusSeconds(300));
         AudienceRestrictionBean audienceRestriction = new AudienceRestrictionBean();
         audienceRestriction.getAudienceURIs().add(TEST_REQUEST_URL);
         cp.setAudienceRestrictions(Collections.singletonList(audienceRestriction));
@@ -925,7 +907,7 @@ public class SAMLResponseTest {
         SubjectConfirmationDataBean subjectConfirmationData = new SubjectConfirmationDataBean();
         subjectConfirmationData.setAddress(TEST_CLIENT_ADDRESS);
         subjectConfirmationData.setInResponseTo(requestId);
-        subjectConfirmationData.setNotAfter(new DateTime().plusMinutes(5));
+        subjectConfirmationData.setNotAfter(Instant.now().plusSeconds(5 * 60));
         subjectConfirmationData.setRecipient(TEST_REQUEST_URL);
         callbackHandler.setSubjectConfirmationData(subjectConfirmationData);
 
@@ -988,12 +970,8 @@ public class SAMLResponseTest {
         callbackHandler.setSubjectName(TEST_USER);
 
         ConditionsBean cp = new ConditionsBean();
-        DateTime currentTime = new DateTime();
-        currentTime = currentTime.plusSeconds(300);
-        cp.setNotAfter(currentTime);
-        currentTime = new DateTime();
-        currentTime = currentTime.plusSeconds(30);
-        cp.setNotBefore(currentTime);
+        cp.setNotAfter(Instant.now().plusSeconds(300));
+        cp.setNotBefore(Instant.now().plusSeconds(30));
         AudienceRestrictionBean audienceRestriction = new AudienceRestrictionBean();
         audienceRestriction.getAudienceURIs().add(TEST_REQUEST_URL);
         cp.setAudienceRestrictions(Collections.singletonList(audienceRestriction));
@@ -1003,7 +981,7 @@ public class SAMLResponseTest {
         SubjectConfirmationDataBean subjectConfirmationData = new SubjectConfirmationDataBean();
         subjectConfirmationData.setAddress(TEST_CLIENT_ADDRESS);
         subjectConfirmationData.setInResponseTo(requestId);
-        subjectConfirmationData.setNotAfter(new DateTime().plusMinutes(5));
+        subjectConfirmationData.setNotAfter(Instant.now().plusSeconds(5 * 60));
         subjectConfirmationData.setRecipient(TEST_REQUEST_URL);
         callbackHandler.setSubjectConfirmationData(subjectConfirmationData);
 
@@ -1172,7 +1150,7 @@ public class SAMLResponseTest {
         SubjectConfirmationDataBean subjectConfirmationData = new SubjectConfirmationDataBean();
         subjectConfirmationData.setAddress(TEST_CLIENT_ADDRESS);
         subjectConfirmationData.setInResponseTo(requestId);
-        subjectConfirmationData.setNotAfter(new DateTime().plusMinutes(5));
+        subjectConfirmationData.setNotAfter(Instant.now().plusSeconds(5 * 60));
         subjectConfirmationData.setRecipient(TEST_REQUEST_URL);
         callbackHandler.setSubjectConfirmationData(subjectConfirmationData);
 
@@ -1213,7 +1191,7 @@ public class SAMLResponseTest {
 
         // Change IssueInstant attribute
         String issueInstance = assertionElement.getAttributeNS(null, "IssueInstant");
-        DateTime issueDateTime = new DateTime(issueInstance, DateTimeZone.UTC);
+        Instant issueDateTime = Instant.parse(issueInstance);
         issueDateTime = issueDateTime.plusSeconds(1);
         assertionElement.setAttributeNS(null, "IssueInstant", issueDateTime.toString());
 
@@ -1633,7 +1611,7 @@ public class SAMLResponseTest {
         SubjectConfirmationDataBean subjectConfirmationData = new SubjectConfirmationDataBean();
         subjectConfirmationData.setAddress(TEST_CLIENT_ADDRESS);
         subjectConfirmationData.setInResponseTo(requestId);
-        subjectConfirmationData.setNotAfter(new DateTime().plusMinutes(5));
+        subjectConfirmationData.setNotAfter(Instant.now().plusSeconds(5 * 60));
         subjectConfirmationData.setRecipient(TEST_REQUEST_URL);
         saml2CallbackHandler.setSubjectConfirmationData(subjectConfirmationData);
 
@@ -1696,7 +1674,7 @@ public class SAMLResponseTest {
         SubjectConfirmationDataBean subjectConfirmationData = new SubjectConfirmationDataBean();
         subjectConfirmationData.setAddress(TEST_CLIENT_ADDRESS);
         subjectConfirmationData.setInResponseTo(requestId);
-        subjectConfirmationData.setNotAfter(new DateTime().plusMinutes(5));
+        subjectConfirmationData.setNotAfter(Instant.now().plusSeconds(5 * 60));
         subjectConfirmationData.setRecipient(TEST_REQUEST_URL);
         saml2CallbackHandler.setSubjectConfirmationData(subjectConfirmationData);
 

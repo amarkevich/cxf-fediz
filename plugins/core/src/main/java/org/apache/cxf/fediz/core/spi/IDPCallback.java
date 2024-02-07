@@ -21,7 +21,7 @@ package org.apache.cxf.fediz.core.spi;
 
 import java.net.URL;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class IDPCallback extends AbstractServletCallback {
 

@@ -36,11 +36,11 @@ import java.util.UUID;
 import java.util.zip.DataFormatException;
 
 import javax.security.auth.DestroyFailedException;
-import javax.servlet.http.HttpServletRequest;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.core.Claim;
 import org.apache.cxf.fediz.core.RequestState;
 import org.apache.cxf.fediz.core.SAMLSSOConstants;
@@ -324,13 +324,11 @@ public class SAMLProcessorImpl extends AbstractFedizProcessor {
             throw new ProcessingException(TYPE.INVALID_REQUEST);
         }
 
-        Instant issueInstant = logoutResponse.getIssueInstant().toDate().toInstant();
-
         FedizResponse fedResponse = new FedizResponse(
             null, logoutResponse.getIssuer().getValue(),
             Collections.emptyList(), Collections.emptyList(),
             null,
-            issueInstant,
+            logoutResponse.getIssueInstant(),
             null,
             null,
             logoutResponse.getID());

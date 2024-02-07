@@ -21,7 +21,7 @@ package org.apache.cxf.fediz.example;
 import java.util.Collections;
 import java.util.Set;
 
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.core.Application;
 
 public class FederationApplication extends Application {
     public Set<Object> getSingletons() {

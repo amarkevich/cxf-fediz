@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.HttpMethod;

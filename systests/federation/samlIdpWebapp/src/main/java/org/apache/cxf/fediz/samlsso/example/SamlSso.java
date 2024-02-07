@@ -27,14 +27,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.zip.DataFormatException;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.UriBuilder;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.stream.XMLStreamException;
@@ -83,14 +83,14 @@ public class SamlSso {
     }
 
     @POST
-    public javax.ws.rs.core.Response login(@FormParam("SAMLRequest") String samlRequest,
+    public jakarta.ws.rs.core.Response login(@FormParam("SAMLRequest") String samlRequest,
         @FormParam("RelayState") String relayState) throws Exception {
 
         return login(samlRequest, relayState, "POST");
     }
 
     @GET
-    public javax.ws.rs.core.Response login(@QueryParam("SAMLRequest") String samlRequest,
+    public jakarta.ws.rs.core.Response login(@QueryParam("SAMLRequest") String samlRequest,
             @QueryParam("RelayState") String relayState, @QueryParam("binding") String binding) throws Exception {
 
         AuthnRequest request = extractRequest(samlRequest);
@@ -194,7 +194,7 @@ public class SamlSso {
         return request;
     }
 
-    protected javax.ws.rs.core.Response postBindingResponse(String relayState, String racs, String responseStr)
+    protected jakarta.ws.rs.core.Response postBindingResponse(String relayState, String racs, String responseStr)
         throws IOException {
         String responseTemplate;
         try (InputStream inputStream = this.getClass().getResourceAsStream("/TemplateSAMLResponse.xml")) {
@@ -206,16 +206,16 @@ public class SamlSso {
         responseTemplate = responseTemplate.replace("%SAMLResponse%", responseStr);
         responseTemplate = responseTemplate.replace("%RelayState%", relayState);
 
-        return javax.ws.rs.core.Response.ok(responseTemplate).type(MediaType.TEXT_HTML).build();
+        return jakarta.ws.rs.core.Response.ok(responseTemplate).type(MediaType.TEXT_HTML).build();
     }
 
-    protected javax.ws.rs.core.Response redirectResponse(String relayState, String racs, String responseStr) {
+    protected jakarta.ws.rs.core.Response redirectResponse(String relayState, String racs, String responseStr) {
         // Perform Redirect to RACS
         UriBuilder ub = UriBuilder.fromUri(racs);
         ub.queryParam("SAMLResponse", responseStr);
         ub.queryParam("RelayState", relayState);
 
-        return javax.ws.rs.core.Response.seeOther(ub.build()).build();
+        return jakarta.ws.rs.core.Response.seeOther(ub.build()).build();
     }
 
 }

@@ -36,19 +36,17 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
-            <version>${cxf.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.validation</groupId>
-                    <artifactId>validation-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-openapi-v3</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jakarta.rs</groupId>
+            <artifactId>jackson-jakarta-rs-json-provider</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -185,21 +183,20 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty9.version}</version>
+                <version>${jetty.version}</version>
                 <inherited>true</inherited>
                 <configuration>
                     <skip>${skipTests}</skip>
                     <stopPort>${idp.stop.port}</stopPort>
                     <stopKey>STOP</stopKey>
-                    <jettyXml>${project.build.directory}/test-classes/jetty.xml,${project.build.directory}/test-classes/jetty-ssl-context.xml,
-                    ${project.build.directory}/test-classes/jetty-ssl.xml,${project.build.directory}/test-classes/jetty-https.xml</jettyXml>
+                    <jettyXmls>${project.build.directory}/test-classes/jetty.xml,${project.build.directory}/test-classes/jetty-ssl-context.xml,${project.build.directory}/test-classes/jetty-ssl.xml,${project.build.directory}/test-classes/jetty-https.xml</jettyXmls>
                     <contextHandlers>
-                        <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                        <contextHandler implementation="org.eclipse.jetty.maven.plugin.MavenWebAppContext">
                             <war>${project.build.directory}/fediz-idp-sts.war</war>
                             <contextPath>/fediz-idp-sts</contextPath>
                             <throwUnavailableOnStartupException>false</throwUnavailableOnStartupException>
                         </contextHandler>
-                        <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                        <contextHandler implementation="org.eclipse.jetty.maven.plugin.MavenWebAppContext">
                             <war>${project.build.directory}/fediz-idp.war</war>
                             <contextPath>/fediz-idp</contextPath>
                         </contextHandler>
@@ -210,12 +207,8 @@
                         <id>start-jetty</id>
                         <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>deploy-war</goal>
+                            <goal>start-war</goal>
                         </goals>
-                        <configuration>
-                            <scanIntervalSeconds>0</scanIntervalSeconds>
-                            <daemon>true</daemon>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>stop-jetty</id>
@@ -319,7 +312,7 @@
                         <artifactId>jetty-maven-plugin</artifactId>
                         <configuration>
                             <contextHandlers>
-                                <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                                <contextHandler implementation="org.eclipse.jetty.maven.plugin.MavenWebAppContext">
                                     <war>${project.build.directory}/fediz-idp.war</war>
                                     <contextPath>/fediz-idp</contextPath>
                                 </contextHandler>
@@ -353,7 +346,7 @@
                         <artifactId>jetty-maven-plugin</artifactId>
                         <configuration>
                             <contextHandlers>
-                                <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                                <contextHandler implementation="org.eclipse.jetty.maven.plugin.MavenWebAppContext">
                                     <war>${project.build.directory}/fediz-idp-remote.war</war>
                                     <contextPath>/fediz-idp-remote</contextPath>
                                 </contextHandler>
@@ -419,7 +412,7 @@
                         <artifactId>jetty-maven-plugin</artifactId>
                         <configuration>
                             <contextHandlers combine.children="append">
-                                <contextHandler implementation="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+                                <contextHandler implementation="org.eclipse.jetty.maven.plugin.MavenWebAppContext">
                                     <war>${project.build.directory}/fediz-idp-sts.war</war>
                                     <contextPath>/fediz-idp-sts</contextPath>
                                 </contextHandler>

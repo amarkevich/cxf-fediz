@@ -51,4 +51,3 @@
         class="org.apache.cxf.fediz.service.idp.service.jpa.TestDBLoader" />
 
 </beans>
-

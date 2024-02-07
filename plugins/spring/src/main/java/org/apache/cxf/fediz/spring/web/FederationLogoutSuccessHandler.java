@@ -22,10 +22,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.cxf.fediz.core.config.FedizContext;
 import org.apache.cxf.fediz.core.exception.ProcessingException;
 import org.apache.cxf.fediz.core.processor.FedizProcessor;
@@ -34,7 +33,6 @@ import org.apache.cxf.fediz.core.processor.RedirectionResponse;
 import org.apache.cxf.fediz.spring.FederationConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -42,10 +40,9 @@ public class FederationLogoutSuccessHandler implements LogoutSuccessHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(FederationLogoutSuccessHandler.class);
 
-    private FederationConfig federationConfig;
+    private final FederationConfig federationConfig;
 
-    @Required
-    public void setFederationConfig(FederationConfig federationConfig) {
+    public FederationLogoutSuccessHandler(FederationConfig federationConfig) {
         this.federationConfig = federationConfig;
     }
 

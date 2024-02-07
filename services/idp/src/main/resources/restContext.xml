@@ -53,22 +53,21 @@
     <bean id="exceptionMapper"
         class="org.apache.cxf.fediz.service.idp.rest.RestServiceExceptionMapper" />
 
-    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" />
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jakarta.rs.json.JacksonXmlBindJsonProvider" />
     
     <!-- CXF Swagger2Feature -->
-    <bean id="swagger2Customizer" class="org.apache.cxf.jaxrs.swagger.Swagger2Customizer">
+    <bean id="openapi2Customizer" class="org.apache.cxf.jaxrs.openapi.OpenApiCustomizer">
         <property name="replaceTags" value="true" />
     </bean> 
-    <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
+    <bean id="openapi2Feature" class="org.apache.cxf.jaxrs.openapi.OpenApiFeature">
         <property name="title" value="Apache Fediz IDP" />
         <property name="version" value="${project.version}" />
         <property name="description" value="Apache Fediz IDP ${project.version}" />
-        <property name="contact" value="dev@cxf.apache.org" />
+        <property name="contactEmail" value="dev@cxf.apache.org" />
 
-        <property name="resourcePackage" value="org.apache.cxf.fediz.service.idp.rest" />
-        <property name="scanAllResources" value="true" />
+        <property name="resourcePackages" value="org.apache.cxf.fediz.service.idp.rest" />
 
-        <property name="customizer" ref="swagger2Customizer" />
+        <property name="customizer" ref="openapi2Customizer" />
         <property name="prettyPrint" value="true" />
     </bean>
     
@@ -88,7 +87,7 @@
             <ref bean="exceptionMapper" />
         </jaxrs:providers>
         <jaxrs:features>
-            <ref bean="swagger2Feature" />
+            <ref bean="openapi2Feature" />
         </jaxrs:features>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json;charset=UTF-8" />

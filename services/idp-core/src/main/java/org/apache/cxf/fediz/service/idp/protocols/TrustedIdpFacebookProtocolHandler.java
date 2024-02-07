@@ -20,16 +20,13 @@
 package org.apache.cxf.fediz.service.idp.protocols;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.Response;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jakarta.ws.rs.core.Form;
+import jakarta.ws.rs.core.Response;
 import org.apache.cxf.fediz.service.idp.IdpConstants;
 import org.apache.cxf.fediz.service.idp.domain.Idp;
 import org.apache.cxf.fediz.service.idp.domain.TrustedIdp;
@@ -155,11 +152,8 @@ public class TrustedIdpFacebookProtocolHandler extends AbstractTrustedIdpOAuth2P
     private ClientAccessToken getAccessTokenUsingCode(String tokenEndpoint, String code, String clientId,
                                                       String clientSecret, String redirectURI) {
         // Here we need to get the AccessToken using the authorization code
-        List<Object> providers = new ArrayList<>();
-        providers.add(new OAuthJSONProvider());
-
         WebClient client =
-            WebClient.create(tokenEndpoint, providers, "cxf-tls.xml");
+            WebClient.create(tokenEndpoint, Collections.singletonList(new OAuthJSONProvider()), "cxf-tls.xml");
 
         ClientConfiguration config = WebClient.getConfig(client);
 

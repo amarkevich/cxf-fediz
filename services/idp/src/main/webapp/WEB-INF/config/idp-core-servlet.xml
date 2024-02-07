@@ -30,7 +30,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/webflow-config
-        http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd">
+        http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd">
 
     <context:component-scan base-package="org.apache.cxf.fediz.service.idp.beans" />
 

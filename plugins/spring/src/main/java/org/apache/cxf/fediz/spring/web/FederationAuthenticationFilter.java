@@ -23,11 +23,10 @@ import java.io.IOException;
 import java.security.cert.X509Certificate;
 import java.time.Instant;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.cxf.fediz.core.FederationConstants;
 import org.apache.cxf.fediz.core.RequestState;
 import org.apache.cxf.fediz.core.SAMLSSOConstants;
@@ -76,7 +75,7 @@ public class FederationAuthenticationFilter extends AbstractAuthenticationProces
         wfReq.setRequestState(savedRequestState);
 
         X509Certificate[] certs =
-            (X509Certificate[])request.getAttribute("javax.servlet.request.X509Certificate");
+            (X509Certificate[])request.getAttribute("jakarta.servlet.request.X509Certificate");
         wfReq.setCerts(certs);
 
         final UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(null, wfReq);

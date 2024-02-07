@@ -28,9 +28,6 @@
     <artifactId>fediz-tomcat</artifactId>
     <name>Apache Fediz Plugin for Tomcat 8/9</name>
     <packaging>jar</packaging>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.apache.cxf.fediz</groupId>

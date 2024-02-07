@@ -18,12 +18,10 @@
  */
 package org.apache.cxf.fediz.spring.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.cxf.fediz.core.FederationConstants;
 import org.apache.cxf.fediz.spring.FederationConfig;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -31,15 +29,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 public class FederationLogoutFilter extends LogoutFilter {
 
-    private FederationConfig federationConfig;
+    private final FederationConfig federationConfig;
     private String logoutUrl;
 
-    public FederationLogoutFilter(LogoutSuccessHandler logoutSuccessHandler, LogoutHandler... handlers) {
+    public FederationLogoutFilter(FederationConfig federationConfig,
+        LogoutSuccessHandler logoutSuccessHandler, LogoutHandler... handlers) {
         super(logoutSuccessHandler, handlers);
-    }
-
-    @Required
-    public void setFederationConfig(FederationConfig federationConfig) {
         this.federationConfig = federationConfig;
     }
 

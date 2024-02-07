@@ -22,7 +22,7 @@ package org.apache.cxf.fediz.core.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Few simple utils. This is originally from the CXF project.

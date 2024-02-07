@@ -29,11 +29,13 @@
     <name>Apache Fediz STS</name>
     <packaging>war</packaging>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <adapter.resource>file</adapter.resource>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -222,14 +224,13 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty9.version}</version>
+                <version>${jetty.version}</version>
                 <inherited>true</inherited>
                 <configuration>
                     <webApp>
                         <contextPath>/fediz-idp-sts</contextPath>
                     </webApp>
-                    <jettyXml>${project.build.directory}/test-classes/jetty.xml,${project.build.directory}/test-classes/jetty-ssl-context.xml,
-                    ${project.build.directory}/test-classes/jetty-ssl.xml,${project.build.directory}/test-classes/jetty-https.xml</jettyXml>
+                    <jettyXmls>${project.build.directory}/test-classes/jetty.xml,${project.build.directory}/test-classes/jetty-ssl-context.xml,${project.build.directory}/test-classes/jetty-ssl.xml,${project.build.directory}/test-classes/jetty-https.xml</jettyXmls>
                     <stopPort>${jetty.port}</stopPort>
                     <stopKey>STOP</stopKey>
                     <skip>${skipTests}</skip>
@@ -240,11 +241,8 @@
                         <phase>pre-integration-test</phase>
                         <inherited>true</inherited>
                         <goals>
-                            <goal>deploy-war</goal>
+                            <goal>start-war</goal>
                         </goals>
-                        <configuration>
-                            <daemon>true</daemon>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>stop-jetty</id>

@@ -19,8 +19,7 @@
 
 package org.apache.cxf.fediz.service.idp.protocols;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.service.idp.spi.ApplicationProtocolHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.webflow.execution.RequestContext;

@@ -28,14 +28,13 @@ import java.time.Instant;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.xml.bind.JAXBException;
-
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.xml.bind.JAXBException;
 import org.apache.cxf.fediz.core.FederationConstants;
 import org.apache.cxf.fediz.core.RequestState;
 import org.apache.cxf.fediz.core.SAMLSSOConstants;
@@ -273,7 +272,7 @@ public class FederationAuthenticator extends LoginAuthenticator {
             wfReq.setRequestState((RequestState) session.getAttribute(J_CONTEXT));
 
             X509Certificate[] certs =
-                (X509Certificate[])request.getAttribute("javax.servlet.request.X509Certificate");
+                (X509Certificate[])request.getAttribute("jakarta.servlet.request.X509Certificate");
             wfReq.setCerts(certs);
 
             FederationLoginService fedLoginService = (FederationLoginService)this._loginService;

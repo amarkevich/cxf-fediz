@@ -19,10 +19,9 @@
 
 package org.apache.cxf.fediz.core.processor;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.w3c.dom.Document;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.core.config.FedizContext;
 import org.apache.cxf.fediz.core.exception.ProcessingException;
 import org.apache.wss4j.common.saml.SamlAssertionWrapper;

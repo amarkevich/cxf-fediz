@@ -20,7 +20,8 @@
 package org.apache.cxf.fediz.core.spi;
 
 import javax.security.auth.callback.Callback;
-import javax.servlet.http.HttpServletRequest;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 public abstract class AbstractServletCallback implements Callback {
 

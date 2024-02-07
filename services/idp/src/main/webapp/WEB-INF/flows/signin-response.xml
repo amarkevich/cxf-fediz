@@ -26,7 +26,7 @@ subflow to get a RP token from the STS.
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="
         http://www.springframework.org/schema/webflow
-        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+        http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
     <input name="idpConfig" />
     <input name="request_context" />
@@ -51,7 +51,7 @@ subflow to get a RP token from the STS.
         <transition
             on-exception="org.apache.cxf.fediz.core.exception.ProcessingException" to="viewBadRequest" />
         <transition
-            on-exception="javax.ws.rs.BadRequestException" to="viewBadRequest" />
+            on-exception="jakarta.ws.rs.BadRequestException" to="viewBadRequest" />
         <transition on-exception="java.lang.Throwable" to="scInternalServerError" />
     </action-state>
     

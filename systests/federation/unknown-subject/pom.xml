@@ -29,10 +29,6 @@
     <artifactId>fediz-systests-federation-unknown-subject</artifactId>
     <name>Apache Fediz Federation Systests Unknown Subject</name>
     <packaging>jar</packaging>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>

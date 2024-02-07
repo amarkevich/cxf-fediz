@@ -18,9 +18,8 @@
  */
 package org.apache.cxf.fediz.service.idp.service.jpa;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import org.apache.openjpa.persistence.jdbc.Index;
 
 @Entity(name = "Entitlement")

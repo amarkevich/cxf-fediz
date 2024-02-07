@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package org.apache.cxf.fediz.core.processor;
 
 import java.io.IOException;
@@ -29,7 +28,6 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,11 +38,11 @@ import java.util.regex.Pattern;
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
-import javax.servlet.http.HttpServletRequest;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.cxf.fediz.core.Claim;
 import org.apache.cxf.fediz.core.FederationConstants;
 import org.apache.cxf.fediz.core.RequestState;
@@ -77,7 +75,6 @@ import org.apache.wss4j.dom.engine.WSSecurityEngineResult;
 import org.apache.wss4j.dom.handler.RequestData;
 import org.apache.wss4j.dom.processor.EncryptedDataProcessor;
 import org.apache.wss4j.dom.processor.Processor;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -180,10 +177,7 @@ public class FederationProcessorImpl extends AbstractFedizProcessor {
                 LOG.warn("RSTR Lifetime expired");
                 throw new ProcessingException(TYPE.TOKEN_EXPIRED);
             }
-            DateTime currentTime = new DateTime();
-            DateTime validFrom = new DateTime(Date.from(lifeTime.created));
-            currentTime = currentTime.plusSeconds(config.getMaximumClockSkew().intValue());
-            if (validFrom.isAfter(currentTime)) {
+            if (lifeTime.created.isAfter(rightNow.plusSeconds(config.getMaximumClockSkew().intValue()))) {
                 LOG.debug("RSTR Lifetime not yet valid");
                 throw new ProcessingException(TYPE.TOKEN_INVALID);
             }

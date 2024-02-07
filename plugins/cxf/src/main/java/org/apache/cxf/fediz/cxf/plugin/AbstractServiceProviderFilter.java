@@ -27,17 +27,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.container.PreMatching;
-import javax.ws.rs.core.Cookie;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.xml.bind.JAXBException;
-
 import org.w3c.dom.Element;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.container.PreMatching;
+import jakarta.ws.rs.core.Cookie;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.xml.bind.JAXBException;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.common.i18n.BundleUtils;
 import org.apache.cxf.fediz.core.FederationConstants;

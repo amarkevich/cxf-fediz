@@ -21,12 +21,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context.xsd
-    http://www.springframework.org/schema/tx
-    http://www.springframework.org/schema/tx/spring-tx.xsd"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-autowire="byName">
     
     <context:component-scan base-package="org.apache.cxf.fediz.service.idp.service" />
@@ -35,20 +33,25 @@
     <bean id="entityManagerFactory"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation"
-            value="classpath*:META-INF/spring-persistence.xml" />
+            value="classpath:META-INF/spring-persistence.xml" />
         <property name="persistenceUnitName" value="fedizPersistenceUnit" />
         <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter">
             <bean
-                class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter">
+                class="org.apache.syncope.core.persistence.jpa.spring.OpenJpaVendorAdapter">
                 <property name="showSql" value="false" />
                 <property name="generateDdl" value="true" />
                 <property name="databasePlatform" value="org.apache.openjpa.jdbc.sql.${jpa.platform}" />
             </bean>
         </property>
+        <!--property name="persistenceProvider">
+            <bean
+                class="org.apache.openjpa.persistence.PersistenceProviderImpl">
+            </bean>
+        </property-->
         <property name="jpaPropertyMap">
             <map>
-                <entry key="javax.persistence.validation.factory" value-ref="validator" />
+                <entry key="jakarta.persistence.validation.factory" value-ref="validator" />
             </map>
         </property>
     </bean>

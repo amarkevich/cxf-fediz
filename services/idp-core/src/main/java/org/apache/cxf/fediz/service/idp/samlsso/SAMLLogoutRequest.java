@@ -19,7 +19,7 @@
 
 package org.apache.cxf.fediz.service.idp.samlsso;
 
-import java.util.Date;
+import java.time.Instant;
 
 import org.opensaml.saml.saml2.core.LogoutRequest;
 
@@ -34,12 +34,12 @@ public class SAMLLogoutRequest extends SAMLAbstractRequest {
     private static final long serialVersionUID = 4353024755428346545L;
 
     private String subjectNameId;
-    private Date notOnOrAfter;
+    private Instant notOnOrAfter;
 
     public SAMLLogoutRequest(LogoutRequest logoutRequest) {
         super(logoutRequest);
         if (logoutRequest.getNotOnOrAfter() != null) {
-            notOnOrAfter = logoutRequest.getNotOnOrAfter().toDate();
+            notOnOrAfter = logoutRequest.getNotOnOrAfter();
         }
 
         if (logoutRequest.getNameID() != null) {
@@ -51,7 +51,7 @@ public class SAMLLogoutRequest extends SAMLAbstractRequest {
         return subjectNameId;
     }
 
-    public Date getNotOnOrAfter() {
+    public Instant getNotOnOrAfter() {
         return notOnOrAfter;
     }
 

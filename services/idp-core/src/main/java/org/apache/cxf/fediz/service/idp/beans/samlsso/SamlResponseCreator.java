@@ -18,6 +18,7 @@
  */
 package org.apache.cxf.fediz.service.idp.beans.samlsso;
 
+import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,7 +44,6 @@ import org.apache.wss4j.common.saml.bean.AudienceRestrictionBean;
 import org.apache.wss4j.common.saml.bean.ConditionsBean;
 import org.apache.wss4j.common.saml.bean.SubjectConfirmationDataBean;
 import org.apache.wss4j.dom.WSConstants;
-import org.joda.time.DateTime;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.NameID;
 import org.opensaml.saml.saml2.core.Response;
@@ -126,7 +126,7 @@ public class SamlResponseCreator extends AbstractSamlResponseCreator {
         SubjectConfirmationDataBean subjectConfirmationData = new SubjectConfirmationDataBean();
         subjectConfirmationData.setAddress(remoteAddr);
         subjectConfirmationData.setInResponseTo(requestID);
-        subjectConfirmationData.setNotAfter(new DateTime().plusMinutes(5));
+        subjectConfirmationData.setNotAfter(Instant.now().plusSeconds(5 * 60));
         subjectConfirmationData.setRecipient(racs);
         callbackHandler.setSubjectConfirmationData(subjectConfirmationData);
 

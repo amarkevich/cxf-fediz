@@ -19,14 +19,10 @@
 
 package org.apache.cxf.fediz.service.idp.protocols;
 
-import java.util.List;
-
 import org.apache.cxf.fediz.service.idp.spi.ProtocolHandler;
 
 public interface ProtocolController<T extends ProtocolHandler> {
 
     T getProtocolHandler(String protocol);
-
-    List<String> getProtocols();
 
 }

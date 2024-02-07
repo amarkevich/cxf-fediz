@@ -29,7 +29,7 @@
     <name>Apache Fediz Plugin Core</name>
     <packaging>bundle</packaging>
     <properties>
-        <cxf.xjc-utils.version>3.3.3</cxf.xjc-utils.version>
+        <cxf.xjc-utils.version>4.0.0</cxf.xjc-utils.version>
     </properties>
     <dependencies>
         <dependency>
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>${ehcache3.version}</version>
+            <classifier>jakarta</classifier>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -70,8 +70,8 @@
             <version>${jaxb.runtime.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <version>${servlet.version}</version>
             <scope>provided</scope>
         </dependency>

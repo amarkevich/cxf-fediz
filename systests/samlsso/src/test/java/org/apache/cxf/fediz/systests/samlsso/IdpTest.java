@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

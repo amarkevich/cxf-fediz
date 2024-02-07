@@ -30,14 +30,14 @@ import java.util.Base64;
 import java.util.UUID;
 
 import javax.security.auth.callback.CallbackHandler;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.cxf.fediz.common.SecurityTestUtil;
 import org.apache.cxf.fediz.core.KeystoreCallbackHandler;
 import org.apache.cxf.fediz.core.config.FedizConfigurator;

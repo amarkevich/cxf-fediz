@@ -29,8 +29,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="org.apache.cxf.fediz.service.idp.protocols" />
-        
-        
+
     <!-- Use http://www.baeldung.com/2012/02/06/properties-with-spring/ instead -->
     <bean
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -42,6 +41,8 @@
         <property name="ignoreResourceNotFound" value="true" />
         <property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
+
+    <bean id="mvcHandlerMappingIntrospector" class="org.springframework.web.servlet.handler.HandlerMappingIntrospector" />
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
 

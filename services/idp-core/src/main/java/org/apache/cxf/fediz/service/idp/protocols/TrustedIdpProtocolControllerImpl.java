@@ -19,23 +19,23 @@
 
 package org.apache.cxf.fediz.service.idp.protocols;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Collection;
 
 import org.apache.cxf.fediz.service.idp.spi.TrustedIdpProtocolHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service("trustedIdpProtocolControllerImpl")
 public class TrustedIdpProtocolControllerImpl implements ProtocolController<TrustedIdpProtocolHandler> {
 
     private static final Logger LOG = LoggerFactory.getLogger(TrustedIdpProtocolControllerImpl.class);
 
-    @Autowired
-    private List<TrustedIdpProtocolHandler> protocolHandlers;
+    private final Collection<TrustedIdpProtocolHandler> protocolHandlers;
+
+    public TrustedIdpProtocolControllerImpl(Collection<TrustedIdpProtocolHandler> protocolHandlers) {
+        this.protocolHandlers = protocolHandlers;
+    }
 
     @Override
     public TrustedIdpProtocolHandler getProtocolHandler(String protocol) {
@@ -46,15 +46,6 @@ public class TrustedIdpProtocolControllerImpl implements ProtocolController<Trus
         }
         LOG.warn("No protocol handler found for {}", protocol);
         return null;
-    }
-
-    @Override
-    public List<String> getProtocols() {
-        List<String> protocols = new ArrayList<>();
-        for (TrustedIdpProtocolHandler protocolHandler : protocolHandlers) {
-            protocols.add(protocolHandler.getProtocol());
-        }
-        return Collections.unmodifiableList(protocols);
     }
 
 }

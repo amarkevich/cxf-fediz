@@ -28,26 +28,23 @@
     <artifactId>fediz-jetty9</artifactId>
     <name>Apache Fediz Plugin for Jetty 9</name>
     <packaging>bundle</packaging>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>${jetty9.version}</version>
+            <version>${jetty.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-security</artifactId>
-            <version>${jetty9.version}</version>
+            <version>${jetty.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-util</artifactId>
-            <version>${jetty9.version}</version>
+            <version>${jetty.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

@@ -18,8 +18,7 @@
  */
 package org.apache.cxf.fediz.service.idp.spi;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.webflow.execution.RequestContext;
 
 public interface ApplicationProtocolHandler extends ProtocolHandler {

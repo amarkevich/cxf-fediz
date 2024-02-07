@@ -23,7 +23,7 @@ package org.apache.cxf.fediz.systests.spring;
 import java.io.File;
 import java.io.IOException;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.LifecycleState;
