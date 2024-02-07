@@ -21,7 +21,7 @@ package org.apache.cxf.fediz.core.spi;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class SignInQueryCallback extends AbstractServletCallback {
 

@@ -24,15 +24,15 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.security.auth.Subject;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.w3c.dom.Element;
 
@@ -79,7 +79,7 @@ public class SecurityContextTTLChecker extends HttpServlet implements Filter {
 
     /*
      * (non-Java-doc)
-     * @see javax.servlet.Filter#doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+     * @see jakarta.servlet.Filter#doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -145,7 +145,7 @@ public class SecurityContextTTLChecker extends HttpServlet implements Filter {
 
     /*
      * (non-Java-doc)
-     * @see javax.servlet.Filter#destroy()
+     * @see jakarta.servlet.Filter#destroy()
      */
     @SuppressWarnings("deprecation")
     public void destroy() {

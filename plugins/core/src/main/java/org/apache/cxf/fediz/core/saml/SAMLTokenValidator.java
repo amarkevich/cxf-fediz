@@ -64,7 +64,6 @@ import org.apache.wss4j.dom.engine.WSSConfig;
 import org.apache.wss4j.dom.handler.RequestData;
 import org.apache.wss4j.dom.saml.WSSSAMLKeyInfoProcessor;
 import org.apache.wss4j.dom.validate.Credential;
-import org.joda.time.DateTime;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.xmlsec.signature.KeyInfo;
@@ -177,8 +176,7 @@ public class SAMLTokenValidator implements TokenValidator {
 
                 // Parse the subject if it exists
                 assertion.parseSubject(
-                    new WSSSAMLKeyInfoProcessor(requestData), requestData.getSigVerCrypto(),
-                    requestData.getCallbackHandler()
+                    new WSSSAMLKeyInfoProcessor(requestData), requestData.getSigVerCrypto()
                 );
 
                 // Now verify trust on the signature
@@ -481,7 +479,7 @@ public class SAMLTokenValidator implements TokenValidator {
         try {
             audience = assertion.getConditions()
                     .getAudienceRestrictionConditions().get(0).getAudiences()
-                    .get(0).getUri();
+                    .get(0).getURI();
         } catch (Exception ex) {
             LOG.warn("Failed to read audience" + ex.getMessage());
         }
@@ -493,7 +491,7 @@ public class SAMLTokenValidator implements TokenValidator {
         String audience = null;
         try {
             audience = assertion.getConditions().getAudienceRestrictions()
-                    .get(0).getAudiences().get(0).getAudienceURI();
+                    .get(0).getAudiences().get(0).getURI();
         } catch (Exception ex) {
             LOG.warn("Failed to read audience" + ex.getMessage());
         }
@@ -502,40 +500,28 @@ public class SAMLTokenValidator implements TokenValidator {
     }
 
 
-    private Instant getExpires(SamlAssertionWrapper assertion) {
-        final DateTime validTill;
+    private static Instant getExpires(SamlAssertionWrapper assertion) {
         if (assertion.getSamlVersion().equals(SAMLVersion.VERSION_20)) {
-            validTill = assertion.getSaml2().getConditions().getNotOnOrAfter();
+            return assertion.getSaml2().getConditions().getNotOnOrAfter();
         } else {
-            validTill = assertion.getSaml1().getConditions().getNotOnOrAfter();
+            return assertion.getSaml1().getConditions().getNotOnOrAfter();
         }
-
-        if (validTill == null) {
-            return null;
-        }
-        return validTill.toDate().toInstant();
     }
 
-    private Instant getCreated(SamlAssertionWrapper assertion) {
-        final DateTime validFrom;
+    private static Instant getCreated(SamlAssertionWrapper assertion) {
         if (assertion.getSamlVersion().equals(SAMLVersion.VERSION_20)) {
-            validFrom = assertion.getSaml2().getConditions().getNotBefore();
+            return assertion.getSaml2().getConditions().getNotBefore();
         } else {
-            validFrom = assertion.getSaml1().getConditions().getNotBefore();
+            return assertion.getSaml1().getConditions().getNotBefore();
         }
-
-        if (validFrom == null) {
-            return null;
-        }
-        return validFrom.toDate().toInstant();
     }
 
     /**
      * Check the Conditions of the Assertion.
      */
-    protected boolean isConditionValid(SamlAssertionWrapper assertion, int maxClockSkew) throws WSSecurityException {
-        DateTime validFrom = null;
-        DateTime validTill = null;
+    protected boolean isConditionValid(SamlAssertionWrapper assertion, int maxClockSkew) {
+        Instant validFrom = null;
+        Instant validTill = null;
         if (assertion.getSamlVersion().equals(SAMLVersion.VERSION_20)
             && assertion.getSaml2().getConditions() != null) {
             validFrom = assertion.getSaml2().getConditions().getNotBefore();
@@ -547,15 +533,14 @@ public class SAMLTokenValidator implements TokenValidator {
         }
 
         if (validFrom != null) {
-            DateTime currentTime = new DateTime();
-            currentTime = currentTime.plusSeconds(maxClockSkew);
+            Instant currentTime = Instant.now().plusSeconds(maxClockSkew);
             if (validFrom.isAfter(currentTime)) {
                 LOG.debug("SAML Token condition (Not Before) not met");
                 return false;
             }
         }
 
-        if (validTill != null && validTill.isBeforeNow()) {
+        if (validTill != null && validTill.isBefore(Instant.now())) {
             LOG.debug("SAML Token condition (Not On Or After) not met");
             return false;
         }

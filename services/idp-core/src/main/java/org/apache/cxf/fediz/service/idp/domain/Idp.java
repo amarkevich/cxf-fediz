@@ -25,11 +25,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jacarta.xml.bind.annotation.XmlAttribute;
+import jacarta.xml.bind.annotation.XmlElementRef;
+import jacarta.xml.bind.annotation.XmlElementWrapper;
+import jacarta.xml.bind.annotation.XmlRootElement;
+import jacarta.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "idp", namespace = "http://org.apache.cxf.fediz/")
 @XmlType(propOrder = {"realm", "uri", "serviceDisplayName", "serviceDescription", "idpUrl", "stsUrl",

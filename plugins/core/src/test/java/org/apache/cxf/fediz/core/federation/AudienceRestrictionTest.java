@@ -26,12 +26,12 @@ import java.util.Collections;
 
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.cxf.fediz.common.STSUtil;
 import org.apache.cxf.fediz.common.SecurityTestUtil;
 import org.apache.cxf.fediz.core.FederationConstants;
@@ -155,7 +155,7 @@ public class AudienceRestrictionTest {
         EasyMock.expect(req.getParameter(FederationConstants.PARAM_ACTION))
             .andReturn(FederationConstants.ACTION_SIGNIN);
         EasyMock.expect(req.getParameter("RelayState")).andReturn(null);
-        EasyMock.expect(req.getAttribute("javax.servlet.request.X509Certificate")).andReturn(null);
+        EasyMock.expect(req.getAttribute("jakarta.servlet.request.X509Certificate")).andReturn(null);
         EasyMock.expect(req.getQueryString()).andReturn(null);
         EasyMock.replay(req);
 
@@ -198,7 +198,7 @@ public class AudienceRestrictionTest {
         EasyMock.expect(req.getParameter(FederationConstants.PARAM_ACTION))
             .andReturn(FederationConstants.ACTION_SIGNIN);
         EasyMock.expect(req.getParameter("RelayState")).andReturn(null);
-        EasyMock.expect(req.getAttribute("javax.servlet.request.X509Certificate")).andReturn(null);
+        EasyMock.expect(req.getAttribute("jakarta.servlet.request.X509Certificate")).andReturn(null);
         EasyMock.expect(req.getQueryString()).andReturn(null);
         EasyMock.replay(req);
 
@@ -241,7 +241,7 @@ public class AudienceRestrictionTest {
         EasyMock.expect(req.getParameter(FederationConstants.PARAM_ACTION))
             .andReturn(FederationConstants.ACTION_SIGNIN);
         EasyMock.expect(req.getParameter("RelayState")).andReturn(null);
-        EasyMock.expect(req.getAttribute("javax.servlet.request.X509Certificate")).andReturn(null);
+        EasyMock.expect(req.getAttribute("jakarta.servlet.request.X509Certificate")).andReturn(null);
         EasyMock.expect(req.getQueryString()).andReturn(null);
         EasyMock.replay(req);
 
@@ -281,7 +281,7 @@ public class AudienceRestrictionTest {
         EasyMock.expect(req.getParameter(FederationConstants.PARAM_ACTION))
             .andReturn(FederationConstants.ACTION_SIGNIN);
         EasyMock.expect(req.getParameter("RelayState")).andReturn(null);
-        EasyMock.expect(req.getAttribute("javax.servlet.request.X509Certificate")).andReturn(null);
+        EasyMock.expect(req.getAttribute("jakarta.servlet.request.X509Certificate")).andReturn(null);
         EasyMock.expect(req.getQueryString()).andReturn(null);
         EasyMock.replay(req);
 
@@ -321,7 +321,7 @@ public class AudienceRestrictionTest {
         EasyMock.expect(req.getParameter(FederationConstants.PARAM_ACTION))
             .andReturn(FederationConstants.ACTION_SIGNIN);
         EasyMock.expect(req.getParameter("RelayState")).andReturn(null);
-        EasyMock.expect(req.getAttribute("javax.servlet.request.X509Certificate")).andReturn(null);
+        EasyMock.expect(req.getAttribute("jakarta.servlet.request.X509Certificate")).andReturn(null);
         EasyMock.expect(req.getQueryString()).andReturn(null);
         EasyMock.replay(req);
 
@@ -364,7 +364,7 @@ public class AudienceRestrictionTest {
         EasyMock.expect(req.getParameter(FederationConstants.PARAM_ACTION))
             .andReturn(FederationConstants.ACTION_SIGNIN);
         EasyMock.expect(req.getParameter("RelayState")).andReturn(null);
-        EasyMock.expect(req.getAttribute("javax.servlet.request.X509Certificate")).andReturn(null);
+        EasyMock.expect(req.getAttribute("jakarta.servlet.request.X509Certificate")).andReturn(null);
         EasyMock.expect(req.getQueryString()).andReturn(null);
         EasyMock.replay(req);
 

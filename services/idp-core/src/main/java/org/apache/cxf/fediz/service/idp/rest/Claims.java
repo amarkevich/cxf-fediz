@@ -21,8 +21,8 @@ package org.apache.cxf.fediz.service.idp.rest;
 
 import java.util.Collection;
 
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlRootElement;
+import jacarta.xml.bind.annotation.XmlElementRef;
+import jacarta.xml.bind.annotation.XmlRootElement;
 
 import org.apache.cxf.fediz.service.idp.domain.Claim;
 

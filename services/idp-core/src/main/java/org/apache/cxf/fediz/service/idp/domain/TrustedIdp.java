@@ -22,9 +22,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jacarta.xml.bind.annotation.XmlAttribute;
+import jacarta.xml.bind.annotation.XmlRootElement;
+import jacarta.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "trustedIdp", namespace = "http://org.apache.cxf.fediz/")
 @XmlType(propOrder = {"realm", "issuer", "url", "name", "description", "protocol", "trustType",
